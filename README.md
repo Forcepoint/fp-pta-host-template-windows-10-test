@@ -2,6 +2,15 @@
 
 This is a Packer process which creates a Windows 10 VM on a vSphere host.
 
+## Setup
+
+The first time you run this should be via Jenkins on your PTA Controller. 
+You can run this packer process on your own machine if you want, but I don't see that as necessary.
+I suggest waiting till you have your PTA Controller, Gitlab, and Artifactory instances setup to then 
+run this through a job on the PTA Controller.
+
+Ensure you modify the Packer json file so it has the appropriate values for your vsphere instance.
+
 ## Notes
 
 This process is inherently different than the template-centos-7-test packer process.
@@ -50,12 +59,6 @@ doing the updates with Ansible simpler too because of the well written ansible m
 You may also notice that there's no place to specify your own Windows Key. That's because the Terraform
 process is where the real key is applied. The one in the Autounattend.xml file is bogus and provided
 by Microsoft for just this sort of scenario.
-
-## Jenkins
-
-You can run this packer process on your own machine if you want, but I don't see that as necessary.
-I suggest waiting till you have your PTA Controller, Gitlab, and Artifactory instances setup to then 
-run this through a job on the PTA Controller. 
 
 ## Useful Links
 
