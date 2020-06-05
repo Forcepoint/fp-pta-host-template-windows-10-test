@@ -1,0 +1,50 @@
+{
+  "variables": {
+    "vm_name": "{{env `PACKER_VM_NAME`}}",
+    "winrm_username": "{{env `PACKER_WIN_USERNAME`}}",
+    "winrm_password": "{{env `PACKER_WIN_PASSWORD`}}",
+    "vsphere_username": "{{env `PACKER_VSPHERE_USER`}}",
+    "vsphere_password": "{{env `PACKER_VSPHERE_PASSWORD`}}"
+  },
+
+  "builders": [
+    {
+      "type": "vsphere-iso",
+
+      "vcenter_server": "vc.company.com",
+      "username": "{{user `vsphere_username`}}",
+      "password": "{{user `vsphere_password`}}",
+      "insecure_connection": "true",
+      "datacenter": "DC",
+
+      "vm_name": "{{user `vm_name`}}",
+      "folder": "/PTA/Test",
+      "host": "esxi01.company.com",
+	  "cluster": "General Cluster",
+      "datastore": "DS01",
+
+      "CPUs": 1,
+      "RAM": 4096,
+      "disk_size": 200000,
+      "disk_controller_type": "lsilogic-sas",
+      "disk_thin_provisioned": true,
+      "network": "VLAN192",
+      "guest_os_type": "windows9_64Guest",
+
+      "communicator": "winrm",
+      "winrm_username": "{{user `winrm_username`}}",
+      "winrm_password": "{{user `winrm_password`}}",
+      "shutdown_command": "shutdown /s /t 10 /f /d p:4:1 /c \"Packer Shutdown\"",
+
+      "iso_paths": ["[ISOs] Microsoft/Windows/10/en_windows_10_business_editions_version_1909_updated_dec_2019_x64_dvd_d16597e9.iso",
+                    "[ISOs] VMware/VMware-tools-windows-11.0.1-14773994.iso"],
+      "iso_checksum": "B2DB07749AC66C773FAC675FEC7E84EA08217D29DCB240383EC358E67B5B417A",
+      "iso_checksum_type": "sha256",
+
+      "floppy_files": [
+        "floppy/Autounattend.xml",
+        "floppy/setup.ps1"
+      ]
+    }
+  ]
+}
