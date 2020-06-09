@@ -2,6 +2,8 @@
 
 This is a Packer process which creates a Windows 10 VM on a vSphere host.
 
+For information about PTA and how to use it please visit https://github.com/Forcepoint/fp-pta-overview/blob/master/README.md
+
 ## Setup
 
 The first time you run this should be via Jenkins on your PTA Controller. 
