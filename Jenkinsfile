@@ -16,6 +16,7 @@ pipeline {
     }
     options {
         disableConcurrentBuilds()
+        buildDiscarder logRotator(numToKeepStr: '10')
     }
     stages {
         stage('Populate Config with Secrets') {
